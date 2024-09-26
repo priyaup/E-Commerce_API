@@ -3,16 +3,22 @@ class Api::V1::ProductsController < ApiController
   before_action :authenticate_user!
 
   def index
-    if current_user.admin? || current_user.customer?
+    if current_user.admin?
       @products = Product.all
-    else
+    elsif current_user.seller?
       @products = current_user.products
+    else
+      @products = Product.all
     end
     render json: @products, status: :ok
   end
 
   def create
-    @product = current_user.products.build(product_params)
+    if current_user.admin?
+      @product = Product.new(product_params)  # Admins create products not tied to any user
+    else
+      @product = current_user.products.build(product_params)
+    end
 
     if @product.save
       render json: @product, status: :created
@@ -37,7 +43,6 @@ class Api::V1::ProductsController < ApiController
   private
 
   def set_product
-    # Ensure the product belongs to the current user or allow admin access
     @product = if current_user.admin?
                  Product.find(params[:id])
                else

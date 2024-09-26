@@ -49,10 +49,18 @@ group :development do
   # gem "spring"
 end
 
-gem 'devise'
 gem 'devise-jwt'
 gem 'cancancan'
 gem 'faker'
+gem 'devise', '~> 4.8'
+gem 'sprockets', '<4'
+gem 'sass-rails'
+gem 'activeadmin'
+
+
+
+
+
+
 
 gem 'rails-controller-testing', group: :test
-
