@@ -1,22 +1,27 @@
 ActiveAdmin.register Product do
-  permit_params :name, :price, :description, :user_id
+  permit_params :name, :description, :price, :user_id
 
   index do
     selectable_column
     id_column
     column :name
-    column :price
     column :description
+    column :price
+    column :user
     actions
   end
 
   form do |f|
-    f.inputs do
+    f.inputs "Product Details" do
       f.input :name
-      f.input :price
       f.input :description
-      f.input :user_id, as: :select, collection: User.all.map { |u| [u.email, u.id] }  # Associate product with a user
+      f.input :price
+      f.input :user, as: :select, collection: User.all.collect { |user| [user.email, user.id] }
     end
     f.actions
   end
+
+  filter :name
+  filter :price
+  filter :user
 end

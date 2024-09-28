@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   }
   
   get '/member_details' => 'members#index'
+  get '/favicon.ico', to: 'application#favicon'
 
   namespace :api do
     namespace :v1 do
       resources :products
       resources :cart_items
-      resource :cart, only: :show
+      resource :carts, only: :show
     end
   end
 end

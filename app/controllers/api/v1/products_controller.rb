@@ -14,11 +14,7 @@ class Api::V1::ProductsController < ApiController
   end
 
   def create
-    if current_user.admin?
-      @product = Product.new(product_params)  # Admins create products not tied to any user
-    else
-      @product = current_user.products.build(product_params)
-    end
+    @product = current_user.products.build(product_params)
 
     if @product.save
       render json: @product, status: :created

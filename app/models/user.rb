@@ -4,7 +4,6 @@ class User < ApplicationRecord
   after_create :create_cart
 
   has_many :products, dependent: :destroy
-  has_many :cart_items, dependent: :destroy
   has_one :cart, dependent: :destroy
 
   validates :email,presence:true , uniqueness:true
@@ -13,14 +12,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  def self.ransackable_associations(auth_object = nil)
-    ["cart", "cart_items", "products"]
-  end
-  
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "email", "encrypted_password", "id", "jti", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at"]
   end
-  
+
 
   ROLES = %w[customer seller admin].freeze
 
