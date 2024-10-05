@@ -26,9 +26,8 @@ RSpec.feature "Admin Management", type: :feature do
 
   fill_in 'Email', with: 'new_admin@example.com'
   
-  # Update this to a specific field selector
-  fill_in 'admin_user_password', with: 'password'  # Change based on actual ID
-  fill_in 'admin_user_password_confirmation', with: 'password'  # Ensure this matches as well
+  fill_in 'admin_user_password', with: 'password' 
+  fill_in 'admin_user_password_confirmation', with: 'password'
 
   click_button 'Create Admin user'
 

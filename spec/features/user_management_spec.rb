@@ -5,7 +5,6 @@ RSpec.feature 'User Management', type: :feature do
   let!(:user) { create(:user, email: 'testuser@example.com') }
 
   before do
-    # Sign in as admin before each test
     visit new_admin_user_session_path
     fill_in 'admin_user_email', with: admin_user.email
     fill_in 'admin_user_password', with: admin_user.password
@@ -13,7 +12,7 @@ RSpec.feature 'User Management', type: :feature do
   end
 
   scenario 'Admin user can create a new user' do
-    visit new_admin_user_path  # Use ActiveAdmin's path
+    visit new_admin_user_path 
     fill_in 'user_email', with: 'newuser@example.com'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
@@ -35,24 +34,20 @@ RSpec.feature 'User Management', type: :feature do
   end
 
   scenario 'Admin can delete a user' do
-    # Admin login process
     login_as(admin_user, scope: :admin_user)
 
-    visit admin_users_path  # Navigate to the page where users are listed
+    visit admin_users_path  
 
-    expect(page).to have_content(user.email)  # Ensure the user is listed on the page
+    expect(page).to have_content(user.email)  
 
-    within("#user_#{user.id}") do  # Assuming each user row has an ID like this
+    within("#user_#{user.id}") do  
       click_link 'Delete'
     end
 
-    # Handle the confirmation alert
     page.driver.browser.switch_to.alert.accept
 
-    # Check for the success message after deletion
     expect(page).to have_content('User was successfully destroyed.')  # Adjusted message to match ActiveAdmin response
 
-    # Ensure the user is no longer listed
     expect(page).not_to have_content(user.email)
   end
 end

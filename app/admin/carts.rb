@@ -14,7 +14,7 @@ ActiveAdmin.register Cart do
 
   form do |f|
     f.inputs do
-      f.input :user, as: :select, collection: User.all.map { |u| [u.email, u.id] }, include_blank: false  # Ensure the user is selectable
+      f.input :user, as: :select, collection: User.all.map { |u| [u.email, u.id] }, include_blank: false
     end
     f.actions
   end

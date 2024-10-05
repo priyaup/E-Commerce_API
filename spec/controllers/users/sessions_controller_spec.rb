@@ -11,10 +11,8 @@ RSpec.describe Users::SessionsController, type: :controller do
   describe 'DELETE #destroy' do
     context 'when signing out a user' do
       it 'signs out the user successfully' do
-        # Simulate user sign in
         sign_in(user)
 
-        # Mock the Authorization header with JWT token
         token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
         request.headers['Authorization'] = "Bearer #{token}"
 

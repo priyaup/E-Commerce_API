@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
+  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
   private 
   def respond_with(resource, options={})
     if resource.persisted?

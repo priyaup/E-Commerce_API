@@ -1,4 +1,3 @@
-# spec/models/admin_user_spec.rb
 require 'rails_helper'
 
 RSpec.describe AdminUser, type: :model do

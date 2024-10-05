@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   
+  
   get '/member_details' => 'members#index'
   get '/favicon.ico', to: 'application#favicon'
 
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       resources :products
       resources :cart_items
       resource :carts, only: :show
+      resources :orders
     end
   end
 end

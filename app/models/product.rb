@@ -1,4 +1,3 @@
-# app/models/product.rb
 class Product < ApplicationRecord
   belongs_to :user
 
@@ -13,6 +12,5 @@ class Product < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["user"]
   end
- 
 end
 

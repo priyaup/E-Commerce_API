@@ -83,6 +83,22 @@ RSpec.configure do |config|
     end
   end
 
+  # spec/rails_helper.rb
+  RSpec.configure do |config|
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.around(:each) do |example|
+      DatabaseCleaner.cleaning do
+        example.run
+      end
+    end
+  end
+
+
+
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
 end

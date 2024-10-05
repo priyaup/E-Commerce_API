@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Api::V1::ProductsController, type: :controller do
   let(:seller) { create(:user, role: 'seller') }
   let(:another_seller) { create(:user, role: 'seller') }
@@ -49,5 +51,4 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       end
     end
   end
-
 end
